@@ -50,7 +50,17 @@ git clone <your-git-ssh-url> rob6323_go2_project
 cd $HOME/rob6323_go2_project
 ./install.sh
 ```
-Do not skip this step, as it configures the environment expected by the training and evaluation scripts. It will launch a job in burst to set up things and clone the IsaacLab repo inside your greene storage. You must wait until the job in burst is complete before launching your first training. To check the progress of the job, you can run `ssh burst "squeue -u $USER"`, and the job should disappear from there once it's completed. It takes around **30 minutes** to complete.
+Do not skip this step, as it configures the environment expected by the training and evaluation scripts. It will launch a job in burst to set up things and clone the IsaacLab repo inside your greene storage. You must wait until the job in burst is complete before launching your first training. To check the progress of the job, you can run `ssh burst "squeue -u $USER"`, and the job should disappear from there once it's completed. It takes around **30 minutes** to complete. 
+You should see something similar to the screenshot below (captured from Greene):
+
+![Example burst squeue output](docs/img/burst_squeue_example.png)
+
+In this output, the **ST** (state) column indicates the job status:
+- `PD` = pending in the queue (waiting for resources).
+- `CF` = instance is being configured.
+- `R`  = job is running.
+
+On burst, it is common for an instance to fail to configure; in that case, the provided scripts automatically relaunch the job when this happens, so you usually only need to wait until the job finishes successfully and no longer appears in `squeue`.
 
 ## What to edit
 
